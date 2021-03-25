@@ -1,0 +1,119 @@
+@font-face {
+    font-family: "Belwe Bold";
+    src: url("Belwe_Bold.otf");
+}
+* {
+    font-family: "Belwe Bold";
+    box-sizing: border-box;
+}
+.loading {
+    background-image: url("./loading.gif");
+    background-size: 100%;
+    background-position: center;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+}
+.navbar {
+    background-image: url("./trent-kaniuga-hearthstone-sketchbookpro8.jpg");
+    background-position: cover;
+    position: -webkit-sticky;
+    position: sticky;
+    color: chocolate;
+    top: 0;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+    z-index: 2;
+}
+.top {
+    display: flex;
+    width: 96vw;
+    justify-content: space-between;
+    align-items: center;
+}
+.title {
+    background-color: #554131;
+    color: #ceba90;
+    border-radius: 20%;
+    display: flex;
+    justify-content: flex-start;
+}
+.currInfo {
+    display: flex;
+    align-items: center;
+}
+.btt {
+    height: 55px;
+    font-size: 1.7rem;
+    background-color: #613b27;
+    color: burlywood;
+    border-radius: 30%;
+    border: 8px solid #613b27;
+}
+.cata {
+    color: brown;
+    border-radius: 25%;
+    border: 5px solid #613b27;
+    background-image: url("./wooden.jpg");
+    background-position: center;
+}
+.currInfo h2 {
+    margin: 20px;
+}
+.content {
+    display: flex;
+    flex-flow: row, wrap;
+    /* display: grid;
+    grid-template-columns: 15% 85%; */
+}
+.querying {
+    background-color: #554131;
+
+    /* background-image: url("./query.jpg");
+    background-repeat: repeat;
+    background-size: 100%; */
+}
+
+.searching {
+    height: 75vh;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 25vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-flow: column;
+}
+.cards {
+    background-color: #ceba90;
+    min-width: 91.7vw;
+    min-height: 100vh;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    height: 260px;
+    width: 190px;
+
+    margin: 2rem;
+}
+.card:hover {
+    background-color: greenyellow;
+}
+
+.card h1 {
+    margin: 30px;
+}
+.card img {
+    margin: -40px -27px -26px -16px;
+}
+.card img:hover {
+    width: 140%;
+    height: 140%;
+    margin: -60px -32px -32px -28px;
+    cursor: pointer;
+}

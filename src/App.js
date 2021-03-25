@@ -1,21 +1,28 @@
-function App() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
-        </div>
-    );
-}
+import Cardset from "./Cardset";
+import Criterias from "./Criterias";
+import Nav from "./navbar";
+import { useCardContext } from "./Shopper";
 
+const App = () => {
+    const { isLoading } = useCardContext();
+
+    if (isLoading) {
+        return <div className="loading"></div>;
+    } else {
+        return (
+            <div>
+                <Nav></Nav>
+                <div className="content">
+                    <div className="querying">
+                        <Criterias />
+                    </div>
+
+                    <div className="displaying">
+                        <Cardset />
+                    </div>
+                </div>
+            </div>
+        );
+    }
+};
 export default App;
