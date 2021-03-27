@@ -1,5 +1,7 @@
 import logo from "./icon.png";
+import { Link } from "react-router-dom";
 import { useCardContext } from "./Shopper";
+import cartpng from "./shopping-cart.png";
 const Nav = () => {
     const {
         currClass,
@@ -55,9 +57,20 @@ const Nav = () => {
                         Shopper
                     </h1>
                 </div>
-                <a className="btt" href="#top">
-                    back to top
-                </a>
+                <div className="btns">
+                    <Link to="/cart">
+                        <div className="tocart">
+                            <img
+                                src={cartpng}
+                                alt="lalala"
+                                className="cartpng"
+                            />
+                        </div>
+                    </Link>
+                    <a className="btt" href="#top">
+                        back to top
+                    </a>
+                </div>
             </div>
             <div className="currInfo">
                 <h2>Current Filters: </h2>

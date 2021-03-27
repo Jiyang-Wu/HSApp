@@ -36,6 +36,7 @@ import Modal from "react-bootstrap/Modal";
 const Cardset = () => {
     const cardset = useCardContext();
     const cardlist = cardset.currCards;
+    const { addToCart } = useCardContext();
     const [show, setShow] = useState(false);
 
     return (
@@ -48,7 +49,7 @@ const Cardset = () => {
                     )
                 ) {
                     return (
-                        <div className="card">
+                        <div className="card" onClick={() => addToCart(card)}>
                             <img src={card.img} alt={card.name} />
                         </div>
                         // <>

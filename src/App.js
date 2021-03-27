@@ -2,7 +2,7 @@ import Cardset from "./Cardset";
 import Criterias from "./Criterias";
 import Nav from "./navbar";
 import { useCardContext } from "./Shopper";
-
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 const App = () => {
     const { isLoading } = useCardContext();
 

@@ -11,6 +11,8 @@ const cardset = {
     currHP: -1,
     currCost: -1,
     currRarity: "all",
+    cart: {},
+    purchase: {},
 };
 const api = "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards";
 const CardContext = React.createContext();
@@ -71,7 +73,15 @@ const Shopper = ({ children }) => {
         dispatch({ type: "CLEAR" });
         dispatch({ type: "COLLECT" });
     };
-
+    const addToCart = (c) => {
+        dispatch({ type: "ADD", payload: { c: c } });
+    };
+    const addOne = (img) => {
+        dispatch({ type: "+1", payload: { img: img } });
+    };
+    const rmFromCart = (img) => {
+        dispatch({ type: "-1", payload: { img: img } });
+    };
     useEffect(() => {
         fetchData(`${api}?collectible=1`);
     }, []);
@@ -87,6 +97,9 @@ const Shopper = ({ children }) => {
                 queryCost,
                 queryRarity,
                 clearAll,
+                addToCart,
+                rmFromCart,
+                addOne,
             }}
         >
             {children}

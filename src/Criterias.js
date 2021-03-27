@@ -134,10 +134,7 @@ const Criterias = () => {
                 <Dropdown.Item onClick={() => queryAtk(5)}>5</Dropdown.Item>
                 <Dropdown.Item onClick={() => queryAtk(6)}>6</Dropdown.Item>
                 <Dropdown.Item onClick={() => queryAtk(7)}>7</Dropdown.Item>
-                <Dropdown.Item onClick={() => queryAtk(8)}>8</Dropdown.Item>
-                <Dropdown.Item onClick={() => queryAtk(9)}>9</Dropdown.Item>
-                <Dropdown.Item onClick={() => queryAtk(10)}>10</Dropdown.Item>
-                <Dropdown.Item onClick={() => queryAtk(11)}>10+</Dropdown.Item>
+                <Dropdown.Item onClick={() => queryAtk(8)}>7+</Dropdown.Item>
             </DropdownButton>
 
             <DropdownButton
@@ -156,9 +153,7 @@ const Criterias = () => {
                 <Dropdown.Item onClick={() => queryHP(6)}>6</Dropdown.Item>
                 <Dropdown.Item onClick={() => queryHP(7)}>7</Dropdown.Item>
                 <Dropdown.Item onClick={() => queryHP(8)}>8</Dropdown.Item>
-                <Dropdown.Item onClick={() => queryHP(9)}>9</Dropdown.Item>
-                <Dropdown.Item onClick={() => queryHP(10)}>10</Dropdown.Item>
-                <Dropdown.Item onClick={() => queryHP(11)}>10+</Dropdown.Item>
+                <Dropdown.Item onClick={() => queryHP(9)}>8+</Dropdown.Item>
             </DropdownButton>
 
             <DropdownButton

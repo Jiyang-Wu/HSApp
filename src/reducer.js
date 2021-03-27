@@ -35,9 +35,9 @@ const reducer = (state, action) => {
                 );
             }
             if (state.currHP !== -1) {
-                if (state.currHP === 11) {
+                if (state.currHP === 9) {
                     newstate = newstate.filter(
-                        (card) => card.type === "Minion" && card.health > 10
+                        (card) => card.type === "Minion" && card.health > 8
                     );
                 } else {
                     newstate = newstate.filter(
@@ -48,9 +48,9 @@ const reducer = (state, action) => {
                 }
             }
             if (state.currAtk !== -1) {
-                if (state.currAtk === 11) {
+                if (state.currAtk === 8) {
                     newstate = newstate.filter(
-                        (card) => card.type === "Minion" && card.attack > 10
+                        (card) => card.type === "Minion" && card.attack > 7
                     );
                 } else {
                     newstate = newstate.filter(
@@ -102,6 +102,61 @@ const reducer = (state, action) => {
                 currCost: -1,
                 currRarity: "all",
             };
+        case "ADD":
+            const cardpic = action.payload.c.img;
+            const meta = action.payload.c.cardSet;
+            const rarity = action.payload.c.rarity;
+            var newpurchase = { ...state.purchase };
+            if (newpurchase.hasOwnProperty(meta)) {
+                var newmeta = { ...newpurchase[meta] };
+                if (newmeta.hasOwnProperty(rarity)) {
+                    newmeta = { ...newmeta, [rarity]: newmeta[rarity] + 1 };
+                } else {
+                    newmeta = { ...newmeta, [rarity]: 1 };
+                }
+                newpurchase = { ...newpurchase, [meta]: newmeta };
+            } else {
+                var newmeta = {};
+                newmeta = { ...newmeta, [rarity]: 1 };
+                newpurchase = { ...newpurchase, [meta]: newmeta };
+            }
+            console.log(newpurchase);
+            var newscart = { ...state.cart };
+            if (
+                state.cart[cardpic] === 1 &&
+                action.payload.c.rarity !== "Legendary"
+            ) {
+                newscart = { ...state.cart, [cardpic]: 2 };
+            } else if (state.cart[cardpic] !== 2) {
+                newscart = { ...state.cart, [cardpic]: 1 };
+            }
+
+            return { ...state, cart: newscart, purchase: newpurchase };
+        case "+1":
+            const picid = action.payload.img;
+            var isLegendary = false;
+            state.cards.map((card) => {
+                if (card.img === picid) {
+                    isLegendary = card.rarity === "Legendary";
+                }
+            });
+
+            var newscart = { ...state.cart };
+
+            if (state.cart[action.payload.img] === 1 && !isLegendary) {
+                newscart = { ...newscart, [action.payload.img]: 2 };
+            }
+
+            return { ...state, cart: newscart };
+        case "-1":
+            var newscart = { ...state.cart };
+            const pic = action.payload.img;
+            if (newscart[pic] === 2) {
+                newscart = { ...newscart, [pic]: 1 };
+            } else {
+                delete newscart[pic];
+            }
+            return { ...state, cart: newscart };
     }
 };
 export { reducer };
