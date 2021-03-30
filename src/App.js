@@ -17,9 +17,7 @@ const App = () => {
                         <Criterias />
                     </div>
 
-                    <div className="displaying">
-                        <Cardset />
-                    </div>
+                    <Cardset />
                 </div>
             </div>
         );

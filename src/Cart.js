@@ -8,7 +8,7 @@ const Cart = () => {
     return (
         <div className="shoppingcart">
             <div className="cartnav">
-                <Link to="/">Back to main</Link>
+                <Link to="/">Back to Gallery</Link>
             </div>
             <div className="incart">
                 <div className="goods">

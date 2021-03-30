@@ -106,57 +106,102 @@ const reducer = (state, action) => {
             const cardpic = action.payload.c.img;
             const meta = action.payload.c.cardSet;
             const rarity = action.payload.c.rarity;
+            var added = false;
             var newpurchase = { ...state.purchase };
-            if (newpurchase.hasOwnProperty(meta)) {
-                var newmeta = { ...newpurchase[meta] };
-                if (newmeta.hasOwnProperty(rarity)) {
-                    newmeta = { ...newmeta, [rarity]: newmeta[rarity] + 1 };
-                } else {
-                    newmeta = { ...newmeta, [rarity]: 1 };
-                }
-                newpurchase = { ...newpurchase, [meta]: newmeta };
-            } else {
-                var newmeta = {};
-                newmeta = { ...newmeta, [rarity]: 1 };
-                newpurchase = { ...newpurchase, [meta]: newmeta };
-            }
-            console.log(newpurchase);
             var newscart = { ...state.cart };
             if (
                 state.cart[cardpic] === 1 &&
                 action.payload.c.rarity !== "Legendary"
             ) {
+                if (newscart[cardpic] !== 2) {
+                    added = true;
+                }
                 newscart = { ...state.cart, [cardpic]: 2 };
             } else if (state.cart[cardpic] !== 2) {
+                if (newscart[cardpic] !== 1) {
+                    added = true;
+                }
                 newscart = { ...state.cart, [cardpic]: 1 };
             }
-
+            if (added === true) {
+                if (newpurchase.hasOwnProperty(meta)) {
+                    var newmeta = { ...newpurchase[meta] };
+                    if (newmeta.hasOwnProperty(rarity)) {
+                        newmeta = { ...newmeta, [rarity]: newmeta[rarity] + 1 };
+                    } else {
+                        newmeta = { ...newmeta, [rarity]: 1 };
+                    }
+                    newpurchase = { ...newpurchase, [meta]: newmeta };
+                } else {
+                    var newmeta = {};
+                    newmeta = { ...newmeta, [rarity]: 1 };
+                    newpurchase = { ...newpurchase, [meta]: newmeta };
+                }
+            }
             return { ...state, cart: newscart, purchase: newpurchase };
         case "+1":
             const picid = action.payload.img;
             var isLegendary = false;
+            var cardset;
+            var cardrarity;
             state.cards.map((card) => {
                 if (card.img === picid) {
+                    cardset = card.cardSet;
+                    cardrarity = card.rarity;
                     isLegendary = card.rarity === "Legendary";
                 }
             });
-
             var newscart = { ...state.cart };
-
-            if (state.cart[action.payload.img] === 1 && !isLegendary) {
-                newscart = { ...newscart, [action.payload.img]: 2 };
+            var newpurchase = { ...state.purchase };
+            var newmeta = { ...newpurchase[cardset] };
+            if (state.cart[picid] === 1 && !isLegendary) {
+                newscart = { ...newscart, [picid]: 2 };
+                newmeta = { ...newmeta, [cardrarity]: newmeta[cardrarity] + 1 };
+                newpurchase = { ...newpurchase, [cardset]: newmeta };
             }
 
-            return { ...state, cart: newscart };
+            return { ...state, cart: newscart, purchase: newpurchase };
         case "-1":
             var newscart = { ...state.cart };
             const pic = action.payload.img;
+            var currset;
+            var currrarity;
+            state.cards.map((card) => {
+                if (card.img === pic) {
+                    currset = card.cardSet;
+                    currrarity = card.rarity;
+                }
+            });
+            var newpurchase = { ...state.purchase };
+            var newmeta = { ...newpurchase[currset] };
+            console.log(newmeta);
             if (newscart[pic] === 2) {
                 newscart = { ...newscart, [pic]: 1 };
+                newmeta = {
+                    ...newmeta,
+                    [currrarity]: newmeta[currrarity] - 1,
+                };
+                newpurchase = { ...newpurchase, [currset]: newmeta };
             } else {
                 delete newscart[pic];
+                console.log(newmeta);
+                newmeta = {
+                    ...newmeta,
+                    [currrarity]: newmeta[currrarity] - 1,
+                };
+                if (newmeta[currrarity] === 0) {
+                    delete newmeta[currrarity];
+                    var metaprops = Object.getOwnPropertyNames(newmeta);
+                    if (metaprops.length === 0) {
+                        delete newpurchase[currset];
+                    } else {
+                        newpurchase = { ...newpurchase, [currset]: newmeta };
+                    }
+                } else {
+                    newpurchase = { ...newpurchase, [currset]: newmeta };
+                }
             }
-            return { ...state, cart: newscart };
+            return { ...state, cart: newscart, purchase: newpurchase };
     }
 };
 export { reducer };

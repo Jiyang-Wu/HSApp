@@ -78,7 +78,7 @@
 }
 .content {
     display: flex;
-    flex-flow: row, wrap;
+    flex-flow: row;
     /* display: grid;
     grid-template-columns: 15% 85%; */
 }
@@ -102,7 +102,7 @@
 }
 .cards {
     background-color: #ceba90;
-    min-width: 91.7vw;
+    min-width: 80vw;
     min-height: 100vh;
     text-align: center;
     display: flex;
@@ -173,4 +173,10 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     text-align: center;
+}
+.cartnav {
+    background-color: #613b27;
+    color: #ceba90;
+    text-align: center;
+    font-size: 2rem;
 }
